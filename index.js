@@ -36,3 +36,25 @@ app.get('/datos-protegidos', (req, res) => {
 
 const port = 3000;
 app.listen(port, () => console.log(`Servidor en ejecución en http://localhost:${port}`));
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  const passwordInput = document.getElementById("password-input");
+  const errorMessage = document.getElementById("error-message");
+
+  passwordInput.addEventListener("input", function() {
+      errorMessage.style.display = "none";
+  });
+
+  document.getElementById("login-form").addEventListener("submit", function(event) {
+      const passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+
+      if (!passwordPattern.test(passwordInput.value)) {
+          event.preventDefault();
+          errorMessage.style.display = "block";
+      }
+  });
+});
+
+
+
