@@ -1,19 +1,43 @@
 <!DOCTYPE html>
 <html>
- <head>
-    <!-- Enlace al archivo CSS -->
-    <link rel="stylesheet" href="styles.css">
- </head>
-
 <head>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="index.css">
+
+    <script>
+        function validarCaracteresEspeciales(input) {
+            var regex = /^[A-Z0-9]+$/;
+            var value = input.value;
+            if (!regex.test(value)) {
+                input.value = value.replace(/[^A-Z0-9]/g, '');
+            }
+        }
+
+        function validarFormulario() {
+            var usuario = document.getElementById("username-input").value;
+            var contraseña = document.getElementById("password-input").value;
+
+            if (usuario === "" || contraseña === "") {
+                alert("Por favor, completa todos los campos.");
+                return false;
+            }
+
+            if (usuario !== usuario.toUpperCase()) {
+                alert("Por favor, ingresa el usuario en mayúsculas.");
+                return false;
+            }
+
+            // Resto de las validaciones y lógica de inicio de sesión
+        }
+
+        // Aquí puedes poner cualquier otro script que necesites
+    </script>
 </head>
 <body>
     <div class="main">
@@ -21,9 +45,9 @@
             <center>
                 <div class="middle">
                     <div id="login">
-                        <form action="javascript:void(0);" method="get">
+                        <form action="javascript:void(0);" method="get" onsubmit="return validarFormulario()">
                             <fieldset class="clearfix">
-                                <p><span class="fa fa-user"></span><input id="username-input" type="text" placeholder="Nombre de usuario" required title="Ingresa solo letras y números, sin caracteres especiales"></p>
+                                <p><span class="fa fa-user"></span><input id="username-input" type="text" placeholder="Nombre de usuario" required title="Ingresa solo letras y números, sin caracteres especiales" oninput="validarCaracteresEspeciales(this)"></p>
                                 <p><span class="fa fa-lock"></span><input id="password-input" type="password" placeholder="Contraseña" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$" title="La contraseña debe contener al menos 8 caracteres, incluyendo al menos una letra mayúscula, una letra minúscula y un número"></p>
                                 <p id="error-message" class="error-message">Contraseña incorrecta</p>
                                 <div>
@@ -37,12 +61,8 @@
                     </div> <!-- fin de inicio de sesión -->
                     <div class="logo">
                         <img src="7750e9a1-de96-4e9c-a66d-c243a9eb7b33-removebg-preview.png" style="max-width: 200px;">
-                        <div class="clearfix"></div>
-                    </div>
-                    
-                </div>
-            </center>
+                   <div class="clearfix"></div>
+            </div>
         </div>
     </div>
-</body>
-</html>
+</div>
